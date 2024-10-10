@@ -1,12 +1,9 @@
-import javax.xml.transform.Source;
-import java.text.DecimalFormat;
 import java.util.Scanner;
 public class Funciones {
     static Scanner sc = new Scanner(System.in);
     private static double [][]matriz;
     private int m;
     private int n;
-    DecimalFormat formateador = new DecimalFormat("####.##");
 
     public double[][] cargaArrayBi() {
         do{
@@ -36,7 +33,7 @@ public class Funciones {
             if(numero==6){
                 for (int i = 0; i < m; i++) {
                     for (int j = 0; j <2; j++) {
-                        System.out.print(formateador.format(claseBi[i][j]) + " " +"\t");
+                        System.out.print(String.format("%8.0f",claseBi[i][j]) + " "+ "\t"  +"\t");
                     }
                     System.out.println();
                 }
@@ -44,7 +41,7 @@ public class Funciones {
             }else {
                 for (int i = 0; i < m; i++) {
                     for (int j = 0; j <n; j++) {
-                        System.out.print(formateador.format(claseBi[i][j]) + " " +"\t");
+                        System.out.print(String.format("%8.0f",claseBi[i][j]) + " " +"\t");
                     }
                     System.out.println();
                 }
@@ -57,7 +54,7 @@ public class Funciones {
         System.out.println("------------");
         System.out.println("---MATRIZ UNIDIMENCIONAL EJERCICIO "+numero+" ---");
         for (int i = 0; i < claseUni.length; i++) {
-            System.out.println(formateador.format(claseUni[i])+ "\t");
+            System.out.println(String.format("%8.0f",claseUni[i])+ "\t");
         }
         System.out.println("------------");
     }
@@ -78,9 +75,17 @@ public class Funciones {
         double [][] arrayCinco= new double [m][2];
         double [] arrayUniOrden= claseUni.clone();
         insercionBase(arrayUniOrden);
+        int [] arrayIndice= new int [claseUni.length];
+        for (int i=0; i< claseUni.length; i++) {
+            for (int j=0; j< claseUni.length;j++) {
+                if (arrayUniOrden[i]==claseUni[j]){
+                    arrayIndice[i]=j+1;
+                }
+            }
+        }
         for (int i = 0; i < claseUni.length; i++) {
-            arrayCinco[i][1] = claseUni[i];
             arrayCinco[i][0] = arrayUniOrden[i];
+            arrayCinco[i][1] = arrayIndice[i];
         }
 
         return arrayCinco;
@@ -107,7 +112,7 @@ public class Funciones {
         }
         System.out.println("------------");
         System.out.println("------EJERCICIO 7------");
-        System.out.println("La suma de elementos columna 1 es: " + formateador.format(sumaTotal));
+        System.out.println("La suma de elementos columna 1 es: " + String.format("%8.0f",sumaTotal));
         System.out.println("------------");
         return sumaTotal;
     }
